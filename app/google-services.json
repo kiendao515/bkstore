@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "528977259608",
+    "firebase_url": "https://book-store-24f86-default-rtdb.firebaseio.com",
+    "project_id": "book-store-24f86",
+    "storage_bucket": "book-store-24f86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528977259608:android:fd153c654e5022f4fc2e2d",
+        "android_client_info": {
+          "package_name": "com.example.bookstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6x7MWWIK8B4_qzyiX44PyYBEC_bpvIBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:528977259608:android:1494fd7ba9335255fc2e2d",
+        "android_client_info": {
+          "package_name": "com.hust.bkservice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6x7MWWIK8B4_qzyiX44PyYBEC_bpvIBE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
