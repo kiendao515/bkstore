@@ -5,20 +5,17 @@ import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import static com.hust.bkservice.Key.TAG;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,8 +36,21 @@ public class NotificationService extends NotificationListenerService {
     public void onCreate() {
         super.onCreate();
         appDatabase = new AppDatabase(getApplicationContext());
+        Interceptor tokenInterceptor = chain -> {
+            Request originalRequest = chain.request();
+            Request newRequest = originalRequest.newBuilder()
+                    .header("x-access-token", "rhaF4GSTrw4QmmEGDLSHq3WKqeYxZRQkf8WEV90Ee8C4khaeJyFmVAm77luCs6kC")
+                    .build();
+
+            Log.d(TAG, "Request Headers: " + newRequest.headers().toString());
+            return chain.proceed(newRequest);
+        };
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(tokenInterceptor)
+                .build();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://hopsach.ddns.net/be/") // Địa chỉ server của bạn
+                .baseUrl("https://hopsach.vn/be/")
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -60,7 +70,7 @@ public class NotificationService extends NotificationListenerService {
             title = extras.getString("android.title");
             text = extras.getString("android.text");
             String notification =packageName+ " : "+ title + " : " + text;
-            if(packageName.contains("com.vietinbank.ipay")){
+            if(packageName.contains("com.acb.acbb.prod")){
                 sendLogToServer(new NotificationLog(packageName,title,text));
             }
             notificationList.add(notification);
